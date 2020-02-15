@@ -1,6 +1,6 @@
 const { body, validationResult } = require('express-validator/check');
 const Post = require('../models/post');
-const User = require('../models/user');
+const User = require('../models/usermodel');
 
 exports.load = async (req, res, next, id) => {
   try {

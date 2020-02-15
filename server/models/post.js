@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
-const sequelize = require('../config')
+const sequelize = require('..')
 
 const comment = sequelize.define('comments', {
-  // author: { type: Schema.Types.ObjectId, ref: 'User', allowNull: false },
+  author: { type: Sequelize.STRING, ref: 'User', allowNull: false },
   body: { type: Sequelize.STRING, allowNull: false },
   created: { type: Sequelize.DATE, default: Sequelize.DATE }
 });
@@ -10,15 +10,15 @@ const comment = sequelize.define('comments', {
 const post = sequelize.define('posts', {
   title: { type: Sequelize.STRING, allowNull: false },
   url: { type: Sequelize.STRING },
-  // author: { type: Schema.Types.ObjectId, ref: 'User', allowNull: false },
+  author: { type: Sequelize.STRING, ref: 'User', allowNull: false },
   category: { type: Sequelize.STRING, allowNull: false },
   score: { type: Sequelize.INTEGER, default: 0 },
   // votes: [{ user: Schema.Types.ObjectId, vote: Number, _id: false }],
   // comments: [commentSchema],
-  created: { type: Sequelize.DATE, default: Sequelize.DATE},
+  created: { type: Sequelize.DATE, default: Sequelize.DATE },
   views: { type: Sequelize.INTEGER, default: 0 },
   type: { type: Sequelize.STRING, default: 'link', allowNull: false },
-  text: { type: Sequelize.STRING },
+  text: { type: Sequelize.STRING }
 });
 
 

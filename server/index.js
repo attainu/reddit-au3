@@ -1,17 +1,68 @@
-const app = require('./app');
-const sequelize = require("./config");
-const config = require('./config');
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-// DB Connection
-sequelize
-  .sync()
-  .then(function(err) {
-    console.log("Connection has been established successfully.");
-  })
-  .catch(function(err) {
-    console.log("Unable to connect to the database:", err.message);
-  });
+const app = express();
+
+const { User } = require('./database');
+
+app.use(bodyParser.json());
+
+app.post('/signup', async(req, res) => {
+    let checkusername = await User.findAll({
+        where: {Username: {[Sequelize.Op.eq]: req.body.Username}}
+    });
+
+    if(checkUsername.length === 0) {
+        try {
+            const hashPassword = await bcrypt.hash(req.body.Password, 10);
+            let user = {...req.body, Password: hashPassword};
+            let newUser = await User.create(user);
+            const token = jwt.sign(newUser.dataValues, process.env.SECRET_OR_KEY);
+            res.json({username: newUser.dataValues.Username, token: token});
+        }
+        catch {
+            return res.status(422).send();
+        }
+    }
+    else {
+        return res.status(409).send();
+    }
+       
+})
+
+app.post('/signin', async(req, res) => {
+    let user = await User.findAll({
+        where: {Username: {[Sequelize.Op.eq]: req.body.Username}}
+    });
+
+    if(user.length === 0) {
+        return res.status(400).send();
+    }
+
+    try {
+        if(await bcrypt.compare(req.body.Password, user[0].dataValues.Password)) {
+            const payload = user[0].dataValues;
+            const token = jwt.sign(payload, process.env.SECRET_OR_KEY);
+            res.json({username: payload.Username, token: token});
+        }
+    }
+    catch {
+        res.status(500).send();
+    }
+})
+
+app.get('/userinfo/:username', async(req, res) => {
+    let userData = await User.findAll({
+        where: {Username: {[Sequelize.Op.eq]: req.params.Username}}
+    });
+
+    res.json(userData[0].dataValues);
+})
 
 
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, console.log(`Server Running at ${PORT}`));
+
+app.listen(3000);
