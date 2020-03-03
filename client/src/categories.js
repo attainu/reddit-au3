@@ -1,9 +1,9 @@
 const categories = [
-  "music",
-  "funny",
-  "videos",
-  "programming",
-  "news",
+  "Study",
+  "Course",
+  "Cricket",
+  "AttainU",
+  "Fun",
 ];
 
 export default categories;

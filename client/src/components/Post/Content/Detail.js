@@ -29,7 +29,7 @@ const PostContentDetail = props => (
     <Link to={`/a/${props.category}`}>/a/{props.category}</Link>
     <span>by</span>
     <Author username={props.author && props.author.username} />
-    <span>{(props.created).fromNow()}</span>
+    <span>{(props.created)}</span>
   </Wrapper>
 );
 

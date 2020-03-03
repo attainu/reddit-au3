@@ -7,7 +7,7 @@ const Timestamp = styled.span`
 `;
 
 const CommentDetailTimestamp = props => (
-  <Timestamp>{(props.created).fromNow()}</Timestamp>
+  <Timestamp>{(props.created)}</Timestamp>
 );
 
 export default CommentDetailTimestamp;
