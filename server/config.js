@@ -1,8 +1,8 @@
 module.exports = {
   port: process.env.Port || 8080,
   db: {
-    prod: process.env.DATABASE_URL || 'mongodb://localhost:27017/mobbit',
-    test: 'mongodb://localhost:27017/mobbit',
+    prod: process.env.DATABASE_URL ||'mongodb+srv://vishal:mh15al4167@cluster0-bzdvo.mongodb.net/test?retryWrites=true&w=majority',
+    test: 'mongodb+srv://vishal:mh15al4167@cluster0-bzdvo.mongodb.net/test?retryWrites=true&w=majority',
     options: {
       useNewUrlParser: true,
       useCreateIndex: true,
