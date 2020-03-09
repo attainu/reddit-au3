@@ -22,6 +22,11 @@ app.use(passport.initialize());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
+
+
+require('./routes')(app);
+
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static( '../client/build' ));
   
@@ -29,10 +34,5 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
     });
   }
-
-
-require('./routes')(app);
-
-
 
 module.exports = app;
