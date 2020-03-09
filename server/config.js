@@ -1,5 +1,5 @@
 module.exports = {
-  port: 8080,
+  port: process.env.Port || 8080,
   db: {
     prod: process.env.DATABASE_URL || 'mongodb://localhost:27017/mobbit',
     test: 'mongodb://localhost:27017/mobbit',
