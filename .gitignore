@@ -2,7 +2,12 @@
 /node_modules
 /.pnp
 .pnp.js
-*.env
+.idea/
+.vs/
+.env
+.pk
+.pem
+.pub
 
 # testing
 /coverage
