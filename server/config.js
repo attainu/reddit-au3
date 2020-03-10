@@ -1,8 +1,9 @@
+require('dotenv').config();
 module.exports = {
   port: process.env.Port || 8080,
   db: {
-    prod: process.env.DATABASE_URL ||'mongodb+srv://vishal:mh15al4167@cluster0-bzdvo.mongodb.net/test?retryWrites=true&w=majority',
-    test: 'mongodb+srv://vishal:mh15al4167@cluster0-bzdvo.mongodb.net/test?retryWrites=true&w=majority',
+    prod: process.env.DATABASE_URL,
+    test: process.env.DATABASE_URL,
     options: {
       useNewUrlParser: true,
       useCreateIndex: true,
